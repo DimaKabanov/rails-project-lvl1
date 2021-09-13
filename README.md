@@ -14,27 +14,40 @@ gem 'hexlet_code'
 
 And then execute:
 
-    $ bundle install
+```console
+$ bundle install
+```
 
 Or install it yourself as:
 
-    $ gem install hexlet_code
+```console
+$ gem install hexlet_code
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+See Example
 
-## Development
+## Example
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+```ruby
+User = Struct.new(:id, :name, :job)
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+user = User.new
 
-## Contributing
+html = HexletCode.form_for user, url: 'hello_world' do |f|
+  f.input :name
+  f.input :job, as: :text
+  f.submit
+end
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hexlet_code. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/hexlet_code/blob/master/CODE_OF_CONDUCT.md).
+puts html
 
-
-## Code of Conduct
-
-Everyone interacting in the HexletCode project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/hexlet_code/blob/master/CODE_OF_CONDUCT.md).
+# <form action="hello_world" method="post">
+#   <label for="user_name">Name</label>
+#   <input id="user_name" name="user[name]" value="" type="text">
+#   <label for="user_job">Job</label>
+#   <textarea cols="20" rows="40" id="user_job" name="user[job]"></textarea>
+#   <input type="submit" name="commit" value="Create">
+# </form>
+```
