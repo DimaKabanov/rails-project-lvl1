@@ -39,4 +39,8 @@ module HexletCode
       builders[tag_name.to_sym].call
     end
   end
+
+  def self.form_for(url: '#')
+    "<form action='#{url}' method='post'></form>"
+  end
 end
