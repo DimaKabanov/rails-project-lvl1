@@ -13,6 +13,10 @@ module FormHelper
       p collection
       p kwargs
     end
+
+    def submit(name = 'Save')
+      p name
+    end
   end
 
   def form_for(struct, url: '#', &block)
