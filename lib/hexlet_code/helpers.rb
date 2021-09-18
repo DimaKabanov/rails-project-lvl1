@@ -15,7 +15,7 @@ module FormHelper
     end
 
     def submit(name = 'Save')
-      p name
+      "<input type='submit' value='#{name}' name='commit'>"
     end
   end
 
