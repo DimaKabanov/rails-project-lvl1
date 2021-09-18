@@ -7,7 +7,7 @@ module FormHelper
       @struct = struct
     end
 
-    def input(field, as:, collection:)
+    def input(field, as: :default, collection: [])
       p field
       p as
       p collection
