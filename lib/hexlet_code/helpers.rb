@@ -1,26 +1,24 @@
-# frozen_string_literal: true
+# # frozen_string_literal: true
 
-# Creates form with inputs
-module FormHelper
-  class Form
-    def initialize(struct)
-      @struct = struct
-    end
+# # Creates form with inputs
+# module FormHelper
+#   class Form
+#     def initialize(struct)
+#       @struct = struct
+#     end
 
-    def input(field, as: :default, collection: [], **kwargs)
-      p field
-      p as
-      p collection
-      p kwargs
-    end
+#     def input(name, **kwargs)
 
-    def submit(name = 'Save')
-      "<input type='submit' value='#{name}' name='commit'>"
-    end
-  end
+#     end
 
-  def form_for(struct, url: '#', &block)
-    form = Form.new struct
-    "<form action='#{url}' method='post'>#{block.call form}</form>"
-  end
-end
+#     def submit(value = 'Save')
+#       Tag.build('submit', value: value, name: 'commit')
+#     end
+#   end
+
+#   def form_for(struct, url: '#', &block)
+#     form = Form.new struct
+#     block.call form
+#     Tag.build('form', action: url, method: 'post')
+#   end
+# end
