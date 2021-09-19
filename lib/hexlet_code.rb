@@ -39,8 +39,10 @@ module HexletCode
   # extend FormHelper
 
   class Error < StandardError; end
-
   module Tag
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Layout/LineLength
+    # rubocop:disable Naming/MethodParameterName
     def self.build(tag_name, attributes, &body)
       attr = make_attributes attributes
 
