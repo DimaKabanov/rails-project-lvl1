@@ -91,7 +91,8 @@ module HexletCode
     end
 
     def submit(value = 'Save')
-      Tag.build('submit', value: value, name: 'commit')
+      submit = Tag.build('submit', value: value, name: 'commit')
+      tags << submit
     end
   end
 
