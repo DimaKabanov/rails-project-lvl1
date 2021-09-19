@@ -35,14 +35,16 @@ def build_option(attributes, &body)
   "<option #{attributes}>#{body.call}</option>"
 end
 
+# rubocop:disable Metrics/AbcSize
+# rubocop:disable Layout/LineLength
+# rubocop:disable Naming/MethodParameterName
+
 module HexletCode
   # extend FormHelper
 
   class Error < StandardError; end
+
   module Tag
-    # rubocop:disable Metrics/AbcSize
-    # rubocop:disable Layout/LineLength
-    # rubocop:disable Naming/MethodParameterName
     def self.build(tag_name, attributes, &body)
       attr = make_attributes attributes
 
@@ -99,3 +101,7 @@ module HexletCode
     "<form action='#{url}' method='post'>#{form.tags.join}</form>"
   end
 end
+
+# rubocop:enable Metrics/AbcSize
+# rubocop:enable Layout/LineLength
+# rubocop:enable Naming/MethodParameterName
