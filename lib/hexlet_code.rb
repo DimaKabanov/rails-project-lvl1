@@ -84,6 +84,10 @@ module HexletCode
       tags << label
       tags << input
     end
+
+    def submit(value = 'Save')
+      Tag.build('submit', value: value, name: 'commit')
+    end
   end
 
   def self.form_for(struct, url: '#', &block)
