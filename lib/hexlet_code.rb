@@ -19,6 +19,10 @@ def build_input(attributes)
   "<input #{attributes}>"
 end
 
+def build_submit(attributes)
+  "<submit #{attributes}>"
+end
+
 def build_label(attributes, &body)
   "<label #{attributes}>#{body.call}</label>"
 end
@@ -48,6 +52,7 @@ module HexletCode
         br: -> { build_br attr },
         img: -> { build_img attr },
         input: -> { build_input attr },
+        submit: -> { build_submit attr },
         label: -> { build_label attr, &body },
         textarea: -> { build_textarea attr, &body },
         select: -> { build_select attr, &body },
