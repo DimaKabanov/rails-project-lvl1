@@ -6,7 +6,9 @@ module HexletCode
   module Inputs
     class Input < Base
       def to_string
-        Tag.build('input', attributes)
+        type = attributes.fetch :type, :text
+        input_attributes = { **attributes, type: type }
+        Tag.build('input', input_attributes)
       end
     end
   end
