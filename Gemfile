@@ -6,4 +6,9 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'rake'
-gem 'rubocop', require: false
+gem 'rubocop'
+
+group :test do
+  gem 'minitest'
+  gem 'rubocop-minitest'
+end
