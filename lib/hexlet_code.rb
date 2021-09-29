@@ -1,107 +1,23 @@
 # frozen_string_literal: true
 
 require 'hexlet_code/version'
-# require 'hexlet_code/helpers'
-
-def make_attributes(attributes)
-  attributes.to_a.map { |(key, value)| "#{key}='#{value}'" }.join ' '
-end
-
-def build_br(attributes)
-  "<br #{attributes}>"
-end
-
-def build_img(attributes)
-  "<img #{attributes}>"
-end
-
-def build_input(attributes)
-  "<input #{attributes}>"
-end
-
-def build_label(attributes, &body)
-  "<label #{attributes}>#{body.call}</label>"
-end
-
-def build_textarea(attributes, &body)
-  "<textarea #{attributes}>#{body.call}</textarea>"
-end
-
-def build_select(attributes, &body)
-  "<select #{attributes}>#{body.call}</select>"
-end
-
-def build_option(attributes, &body)
-  "<option #{attributes}>#{body.call}</option>"
-end
-
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable Layout/LineLength
-# rubocop:disable Naming/MethodParameterName
+require 'hexlet_code/form'
+require 'hexlet_code/tag'
+require 'hexlet_code/inputs/base'
+require 'hexlet_code/inputs/input'
+require 'hexlet_code/inputs/text'
+require 'hexlet_code/inputs/select'
 
 module HexletCode
-  # extend FormHelper
-
   class Error < StandardError; end
 
-  module Tag
-    def self.build(tag_name, attributes, &body)
-      attr = make_attributes attributes
-
-      builders = {
-        br: -> { build_br attr },
-        img: -> { build_img attr },
-        input: -> { build_input attr },
-        label: -> { build_label attr, &body },
-        textarea: -> { build_textarea attr, &body },
-        select: -> { build_select attr, &body },
-        option: -> { build_option attr, &body }
-      }
-
-      builders[tag_name.to_sym].call
-    end
-  end
-
-  class Form
-    attr_reader :tags
-
-    def initialize(struct)
-      @struct = struct
-      @tags = []
-    end
-
-    def input(field, as: :default, collection: [], **kwargs)
-      label = Tag.build('label', for: field) { field.capitalize }
-      input = case as
-              when :default
-                attr = { type: 'text', value: @struct[field], name: field, id: field }
-                Tag.build('input', attr.merge(kwargs))
-              when :text
-                attr = { name: field, id: field }
-                Tag.build('textarea', attr.merge(kwargs)) { @struct[field] }
-              when :select
-                attr = { name: field, id: field }
-                options = collection.map { |item| Tag.build('option', value: @struct[field], selected: item == @struct[field]) { @struct[field] } }
-                Tag.build('select', attr.merge(kwargs)) { options.join }
-              end
-
-      tags << label
-      tags << input
-    end
-
-    def submit(value = 'Save')
-      submit = Tag.build('input', type: 'submit', value: value, name: 'commit')
-      tags << submit
-    end
-  end
-
-  def self.form_for(struct, url: '#', &block)
+  def self.form_for(struct, options = {})
     form = Form.new struct
-    block.call form
-    "<form action='#{url}' method='post'>#{form.tags.join}</form>"
+    yield form if block_given?
+
+    action = options.fetch :action, '#'
+    method = options.fetch :method, 'post'
+
+    Tag.build('form', action: action, method: method) { form.tags.join }
   end
 end
-
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Layout/LineLength
-# rubocop:enable Naming/MethodParameterName
