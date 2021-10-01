@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 require 'hexlet_code/version'
-require 'hexlet_code/form'
-require 'hexlet_code/tag'
-require 'hexlet_code/inputs/base'
-require 'hexlet_code/inputs/input'
-require 'hexlet_code/inputs/text'
-require 'hexlet_code/inputs/select'
 
 module HexletCode
+  autoload :Form, 'hexlet_code/form'
+  autoload :Tag, 'hexlet_code/tag'
+  autoload :Inputs, 'hexlet_code/inputs'
+
   class Error < StandardError; end
 
   def self.form_for(struct, options = {})

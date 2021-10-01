@@ -33,7 +33,7 @@ See Example
 
 ```ruby
 User = Struct.new(:name, :email, :job, :gender, keyword_init: true)
-user = user.new name: 'rob', email: 'user@mail.com', job: 'hexlet', gender: 'm'
+user = User.new name: 'rob', email: 'user@mail.com', job: 'hexlet', gender: 'm'
 
 html = HexletCode.form_for user do |f|
   f.input :name, class: 'input-text'

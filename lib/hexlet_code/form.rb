@@ -15,7 +15,7 @@ module HexletCode
       options = { collection: collection }
 
       label = Tag.build('label', for: name) { name.capitalize }
-      input = Object.const_get("HexletCode::Inputs::#{input_type.to_s.capitalize}").new(attributes, options).to_string
+      input = Inputs.const_get(input_type.to_s.capitalize).new(attributes, options).to_string
 
       tags << label
       tags << input
