@@ -11,11 +11,11 @@ module HexletCode
 
     def input(name, collection: [], **kwargs)
       input_type = kwargs.fetch :as, :input
-      attributes = { **kwargs.except(:as), value: struct[name], name: name, id: name }
-      options = { collection: collection }
+      input_attributes = { **kwargs.except(:as), value: struct[name], name: name, id: name }
+      input_options = { collection: collection }
 
       label = Tag.build('label', for: name) { name.capitalize }
-      input = Inputs.const_get(input_type.to_s.capitalize).new(attributes, options).to_string
+      input = Inputs.const_get(input_type.to_s.capitalize).new(input_attributes, input_options).to_string
 
       tags << label
       tags << input
