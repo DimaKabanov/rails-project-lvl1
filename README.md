@@ -32,23 +32,32 @@ See Example
 ## Example
 
 ```ruby
-User = Struct.new(:id, :name, :job)
+User = Struct.new(:name, :email, :job, :gender, keyword_init: true)
+user = user.new name: 'rob', email: 'user@mail.com', job: 'hexlet', gender: 'm'
 
-user = User.new
-
-html = HexletCode.form_for user, url: 'hello_world' do |f|
-  f.input :name
+html = HexletCode.form_for user do |f|
+  f.input :name, class: 'input-text'
+  f.input :email, type: :email
   f.input :job, as: :text
+  f.input :gender, as: :select, collection: %w[m f]
   f.submit
 end
 
 puts html
 
-# <form action="hello_world" method="post">
-#   <label for="user_name">Name</label>
-#   <input id="user_name" name="user[name]" value="" type="text">
-#   <label for="user_job">Job</label>
-#   <textarea cols="20" rows="40" id="user_job" name="user[job]"></textarea>
-#   <input type="submit" name="commit" value="Create">
+# <form action="#" method="post">
+#     <label for="name">Name</label>
+#     <input class="input-text" value="rob" name="name" id="name" type="text">
+#     <label for="email">Email</label>
+#     <input type="email" value="user@mail.com" name="email" id="email">
+#     <label for="job">Job</label>
+#     <textarea value="hexlet" name="job" id="job" cols="20" rows="40">
+#     <label for="gender">Gender</label>
+#     <select name="gender" id="gender">
+#         <option value="m" selected="true">m</option>
+#         <option value="f">f</option>
+#     </select>
+#     <input type="submit" value="Save" name="commit">
 # </form>
 ```
+
