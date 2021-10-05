@@ -4,6 +4,7 @@ require_relative 'base'
 
 module HexletCode
   module Inputs
+    # Creates a textarea tag
     class Text < Base
       def to_string
         cols = attributes.fetch :cols, 20

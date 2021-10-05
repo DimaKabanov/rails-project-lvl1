@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module HexletCode
+  # Base data for inputs
   class Base
     attr_reader :attributes, :options
 

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module HexletCode
+  # Creates a form tag
   module FormRender
     def self.render(form, options)
       yield form if block_given?

@@ -2,6 +2,7 @@
 
 require 'hexlet_code/version'
 
+# Creates form markup
 module HexletCode
   autoload :Form, 'hexlet_code/form'
   autoload :FormRender, 'hexlet_code/form_render'

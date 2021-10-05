@@ -4,6 +4,7 @@ require_relative 'base'
 
 module HexletCode
   module Inputs
+    # Creates a select tag
     class Select < Base
       def to_string
         select_attributes = attributes.except :value

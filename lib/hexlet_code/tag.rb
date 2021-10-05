@@ -4,6 +4,7 @@ require_relative 'tags/single_tag'
 require_relative 'tags/paired_tag'
 
 module HexletCode
+  # Creates tag markup
   module Tag
     def self.build(tag_name, attributes, &block)
       if block_given?
