@@ -12,7 +12,7 @@ module HexletCode
     end
 
     def attributes_as_line
-      attributes.to_a.map { |(key, value)| "#{key}=\"#{value}\"" }.join ' '
+      attributes.to_a.map { |(key, value)| " #{key}=\"#{value}\"" }.join
     end
   end
 end
