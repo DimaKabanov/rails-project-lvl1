@@ -1,17 +1,29 @@
 # frozen_string_literal: true
 
-require_relative 'tags/single_tag'
-require_relative 'tags/paired_tag'
-
 module HexletCode
   # Creates tag markup
-  module Tag
+  class Tag
     def self.build(tag_name, attributes, &block)
-      if block_given?
-        PairedTag.new(tag_name, attributes, &block).to_string
+      single_tags = %w[input textarea]
+      attributes_line = attributes_as_line attributes
+
+      if single_tags.include? tag_name
+        single_tag(tag_name, attributes_line)
       else
-        SingleTag.new(tag_name, attributes).to_string
+        paired_tag(tag_name, attributes_line, &block)
       end
+    end
+
+    def self.paired_tag(tag_name, attributes)
+      "<#{tag_name}#{attributes}>#{yield}</#{tag_name}>"
+    end
+
+    def self.single_tag(tag_name, attributes)
+      "<#{tag_name}#{attributes}>"
+    end
+
+    def self.attributes_as_line(attributes)
+      attributes.to_a.map { |(key, value)| " #{key}=\"#{value}\"" }.join
     end
   end
 end
