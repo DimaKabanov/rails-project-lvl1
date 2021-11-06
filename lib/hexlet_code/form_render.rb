@@ -15,16 +15,19 @@ module HexletCode
       form.tags << Tag.build('label', for: name) { name.capitalize }
     end
 
+    def build_tag(type, attributes, options)
+      form.tags << HexletCode.const_get(type.to_s.capitalize).new(attributes, options).build
+    end
+
     def input(name, collection: [], **kwargs)
-      build_label(name)
+      raise NoMethodError unless struct.members.include?(name)
 
       input_type = kwargs.fetch :as, :input
       input_attributes = { **kwargs.except(:as), value: struct[name], name: name, id: name }
       input_options = { collection: collection }
 
-      input = HexletCode.const_get(input_type.to_s.capitalize).new(input_attributes, input_options).build
-
-      form.tags << input
+      build_label(name)
+      build_tag(input_type, input_attributes, input_options)
     end
 
     def submit(value = 'Save')
