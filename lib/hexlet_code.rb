@@ -7,7 +7,9 @@ module HexletCode
   autoload :Form, 'hexlet_code/form'
   autoload :FormRender, 'hexlet_code/form_render'
   autoload :Tag, 'hexlet_code/tag'
-  autoload :Inputs, 'hexlet_code/inputs'
+  autoload :Input, 'hexlet_code/inputs/input'
+  autoload :Text, 'hexlet_code/inputs/text'
+  autoload :Select, 'hexlet_code/inputs/select'
 
   class Error < StandardError; end
 

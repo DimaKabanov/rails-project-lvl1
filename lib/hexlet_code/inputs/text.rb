@@ -3,15 +3,13 @@
 require_relative 'base'
 
 module HexletCode
-  module Inputs
-    # Creates a textarea tag
-    class Text < Base
-      def to_string
-        cols = attributes.fetch :cols, 20
-        rows = attributes.fetch :rows, 40
-        textarea_attributes = { **attributes, cols: cols, rows: rows }
-        Tag.build('textarea', textarea_attributes)
-      end
+  # Creates a textarea tag
+  class Text < Base
+    def to_string
+      cols = attributes.fetch :cols, 20
+      rows = attributes.fetch :rows, 40
+      textarea_attributes = { **attributes, cols: cols, rows: rows }
+      Tag.build('textarea', textarea_attributes)
     end
   end
 end
