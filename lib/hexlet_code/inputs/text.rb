@@ -5,7 +5,7 @@ require_relative 'base'
 module HexletCode
   # Creates a textarea tag
   class Text < Base
-    def to_string
+    def build
       cols = attributes.fetch :cols, 20
       rows = attributes.fetch :rows, 40
       textarea_attributes = { **attributes, cols: cols, rows: rows }

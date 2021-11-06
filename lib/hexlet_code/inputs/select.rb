@@ -5,7 +5,7 @@ require_relative 'base'
 module HexletCode
   # Creates a select tag
   class Select < Base
-    def to_string
+    def build
       select_attributes = attributes.except :value
       select_options = options[:collection].map do |option|
         option_attributes = { value: option }

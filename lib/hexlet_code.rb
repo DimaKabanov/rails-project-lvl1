@@ -13,8 +13,10 @@ module HexletCode
 
   class Error < StandardError; end
 
-  def self.form_for(struct, options = {}, &block)
-    form = Form.new struct
-    FormRender.render(form, options, &block)
+  def self.form_for(struct, options = {})
+    form = Form.new
+    form_render = FormRender.new(form, struct, options)
+    yield form_render if block_given?
+    form_render.render
   end
 end

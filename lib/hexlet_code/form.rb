@@ -3,28 +3,10 @@
 module HexletCode
   # Creates a collection of tags
   class Form
-    attr_reader :tags, :struct
+    attr_reader :tags
 
-    def initialize(struct)
-      @struct = struct
+    def initialize
       @tags = []
-    end
-
-    def input(name, collection: [], **kwargs)
-      input_type = kwargs.fetch :as, :input
-      input_attributes = { **kwargs.except(:as), value: struct[name], name: name, id: name }
-      input_options = { collection: collection }
-
-      label = Tag.build('label', for: name) { name.capitalize }
-      input = HexletCode.const_get(input_type.to_s.capitalize).new(input_attributes, input_options).to_string
-
-      tags << label
-      tags << input
-    end
-
-    def submit(value = 'Save')
-      submit = Tag.build('input', type: 'submit', value: value, name: 'commit')
-      tags << submit
     end
   end
 end
